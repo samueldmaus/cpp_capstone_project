@@ -10,10 +10,12 @@ class AppFrame : public wxFrame
 {
 public:
     AppFrame(const wxString& title);
-    void OnButtonClick()
+    void OnButtonClick(wxCommandEvent& event);
     wxBoxSizer *sizer;
     wxGridSizer *grd_sizer;
     wxButton *button;
+
+    DECLARE_EVENT_TABLE()
 private:
     std::mutex mtx_;
 };

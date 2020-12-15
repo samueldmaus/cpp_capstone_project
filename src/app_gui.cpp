@@ -6,8 +6,9 @@
 #include "app_gui.h"
 #include "dialog.cpp"
 
+// event handler
 BEGIN_EVENT_TABLE(AppFrame, wxFrame)
-  EVT_BUTTON()
+  
 END_EVENT_TABLE()
 
 // array for button labels
@@ -50,6 +51,11 @@ AppFrame::AppFrame(const wxString& title)
   sizer->Add(grd_sizer, 1, wxEXPAND);
   SetSizer(sizer);
   Centre();
+}
+
+void AppFrame::OnButtonClick(wxCommandEvent& event) {
+
+  wxMessageBox("clicked button");
 }
 
 // implement wxWidgets application

@@ -7,11 +7,19 @@
 #IncludeRegexTransform: 
 
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.cpp
+iostream
+-
+sstream
+-
+ctime
+-
 app_gui.h
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.h
 
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.h
 wx/wx.h
+-
+ctime
 -
 
 /usr/include/wx-3.0/wx/accel.h

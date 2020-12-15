@@ -11,7 +11,9 @@ iostream
 -
 sstream
 -
-ctime
+string
+-
+wx/time.h
 -
 app_gui.h
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.h
@@ -20,6 +22,8 @@ app_gui.h
 wx/wx.h
 -
 ctime
+-
+mutex
 -
 
 /usr/include/wx-3.0/wx/accel.h

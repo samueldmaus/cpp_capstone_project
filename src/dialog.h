@@ -7,7 +7,7 @@ class MyDialog : public wxDialog
 {
 public:
     wxTextCtrl *eq_display;
-
+    wxButton* button;
 };
 
 #endif

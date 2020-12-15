@@ -6,10 +6,7 @@
 #include "app_gui.h"
 #include "dialog.cpp"
 
-// event handler
-BEGIN_EVENT_TABLE(AppFrame, wxFrame)
-  
-END_EVENT_TABLE()
+// event table handler
 
 // array for button labels
 wxString rows[] = {wxString(wxT("7")), wxString(wxT("8")), wxString(wxT("9")), wxString(wxT("/")), wxString(wxT("4")), wxString(wxT("5")), wxString(wxT("6")),
@@ -36,16 +33,17 @@ AppFrame::AppFrame(const wxString& title)
   grd_sizer = new wxGridSizer(5, 4, 2, 2);
 
   // top row of buttons
-
-  grd_sizer->Add(new wxButton(this, -1, wxT("Cls")), 0, wxEXPAND);
+  wxButton* BUTTON1 = new wxButton(this, -1, wxT("Cls"));
+  grd_sizer->Add(BUTTON1, 0, wxEXPAND);
   grd_sizer->Add(new wxButton(this, -1, wxT("Bck")), 0, wxEXPAND);
   grd_sizer->Add(new wxStaticText(this, -1, wxT("")), 0, wxEXPAND);
   grd_sizer->Add(new wxButton(this, -1, wxT("Close")), 0, wxEXPAND);
 
   // everything for the buttons
   for (wxString &row : rows) {
-    button = new wxButton(this, -1, row);
-    grd_sizer->Add(button, 0, wxEXPAND);
+    my_app_dialog.button = new wxButton(this, -1, row);
+    my_app_dialog.button->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &AppFrame::OnButtonClick, this);
+    grd_sizer->Add(my_app_dialog.button, 0, wxEXPAND);
   }
 
   sizer->Add(grd_sizer, 1, wxEXPAND);
@@ -53,9 +51,10 @@ AppFrame::AppFrame(const wxString& title)
   Centre();
 }
 
+
 void AppFrame::OnButtonClick(wxCommandEvent& event) {
 
-  wxMessageBox("clicked button");
+    wxMessageBox("clicked button");
 }
 
 // implement wxWidgets application

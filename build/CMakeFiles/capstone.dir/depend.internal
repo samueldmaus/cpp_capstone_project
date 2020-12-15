@@ -4,6 +4,8 @@
 CMakeFiles/capstone.dir/src/app_gui.cpp.o
  /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.cpp
  /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.h
+ /home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.cpp
+ /home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.h
  /usr/include/wx-3.0/wx/accel.h
  /usr/include/wx-3.0/wx/access.h
  /usr/include/wx-3.0/wx/affinematrix2d.h

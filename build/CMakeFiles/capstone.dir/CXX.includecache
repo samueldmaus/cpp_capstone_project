@@ -17,6 +17,8 @@ wx/time.h
 -
 app_gui.h
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.h
+dialog.cpp
+/home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.cpp
 
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.h
 wx/wx.h
@@ -24,6 +26,14 @@ wx/wx.h
 ctime
 -
 mutex
+-
+
+/home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.cpp
+dialog.h
+/home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.h
+
+/home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.h
+wx/wx.h
 -
 
 /usr/include/wx-3.0/wx/accel.h

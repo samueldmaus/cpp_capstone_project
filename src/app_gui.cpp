@@ -4,9 +4,14 @@
 #include <wx/time.h>
 
 #include "app_gui.h"
+#include "dialog.cpp"
 
+BEGIN_EVENT_TABLE(AppFrame, wxFrame)
+  EVT_BUTTON()
+END_EVENT_TABLE()
 
- wxString rows[] = {wxString(wxT("7")), wxString(wxT("8")), wxString(wxT("9")), wxString(wxT("/")), wxString(wxT("4")), wxString(wxT("5")), wxString(wxT("6")),
+// array for button labels
+wxString rows[] = {wxString(wxT("7")), wxString(wxT("8")), wxString(wxT("9")), wxString(wxT("/")), wxString(wxT("4")), wxString(wxT("5")), wxString(wxT("6")),
   wxString(wxT("x")), wxString(wxT("1")), wxString(wxT("2")), wxString(wxT("3")), wxString(wxT("-")), wxString(wxT("0")), wxString(wxT(".")),
   wxString(wxT("=")), wxString(wxT("+"))};
 
@@ -24,26 +29,28 @@ AppFrame::AppFrame(const wxString& title)
 {
   // create text ctrl for displaying the numbers
   sizer = new wxBoxSizer(wxVERTICAL);
-  eq_display = new wxTextCtrl(this, -1, wxT(""), wxPoint(-1, -1), wxSize(-1, -1), wxTE_RIGHT);
-  sizer->Add(eq_display, 0, wxEXPAND | wxTOP | wxBOTTOM, 4);
+  my_app_dialog.eq_display = new wxTextCtrl(this, -1, wxT(""), wxPoint(-1, -1), wxSize(-1, -1), wxTE_READONLY | wxTE_RIGHT);
+  sizer->Add(my_app_dialog.eq_display, 0, wxEXPAND | wxTOP | wxBOTTOM, 4);
+
   grd_sizer = new wxGridSizer(5, 4, 2, 2);
 
   // top row of buttons
+
   grd_sizer->Add(new wxButton(this, -1, wxT("Cls")), 0, wxEXPAND);
   grd_sizer->Add(new wxButton(this, -1, wxT("Bck")), 0, wxEXPAND);
   grd_sizer->Add(new wxStaticText(this, -1, wxT("")), 0, wxEXPAND);
   grd_sizer->Add(new wxButton(this, -1, wxT("Close")), 0, wxEXPAND);
 
+  // everything for the buttons
   for (wxString &row : rows) {
-    grd_sizer->Add(new wxButton(this, -1, row), 0, wxEXPAND);
+    button = new wxButton(this, -1, row);
+    grd_sizer->Add(button, 0, wxEXPAND);
   }
-
 
   sizer->Add(grd_sizer, 1, wxEXPAND);
   SetSizer(sizer);
   Centre();
 }
-
 
 // implement wxWidgets application
 IMPLEMENT_APP(MyApp)

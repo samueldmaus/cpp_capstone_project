@@ -11,6 +11,8 @@ class AppFrame : public wxFrame
 public:
     AppFrame(const wxString& title);
     void OnButtonClick(wxCommandEvent& event);
+    void ClearTextCtrl(wxCommandEvent& event);
+    void DelLastInput(wxCommandEvent& event);
     wxBoxSizer *sizer;
     wxGridSizer *grd_sizer;
 

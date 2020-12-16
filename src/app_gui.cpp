@@ -1,6 +1,10 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <future>
+#include <thread>
+#include <memory>
+#include <functional>
 #include <wx/time.h>
 
 #include "app_gui.h"
@@ -46,9 +50,15 @@ AppFrame::AppFrame(const wxString& title)
 
   // everything for the buttons
   for (wxString &row : rows) {
-    my_app_dialog.button = new wxButton(this, 1, row);
-    my_app_dialog.button->Bind(wxEVT_BUTTON, &AppFrame::OnButtonClick, this);
-    grd_sizer->Add(my_app_dialog.button, 0, wxEXPAND);
+    if(row == "=") {
+      my_app_dialog.button = new wxButton(this, 1, row);
+      my_app_dialog.button->Bind(wxEVT_BUTTON, &AppFrame::GetEquation, this);
+      grd_sizer->Add(my_app_dialog.button, 0, wxEXPAND);
+    } else {
+      my_app_dialog.button = new wxButton(this, 1, row);
+      my_app_dialog.button->Bind(wxEVT_BUTTON, &AppFrame::OnButtonClick, this);
+      grd_sizer->Add(my_app_dialog.button, 0, wxEXPAND);
+    }
   }
 
   sizer->Add(grd_sizer, 1, wxEXPAND);
@@ -58,20 +68,43 @@ AppFrame::AppFrame(const wxString& title)
 
 // function to display button val to wxTextCtrl (have to dynamically cast wxObject into a wxButton in order for GetLabel method to work)
 void AppFrame::OnButtonClick(wxCommandEvent& event) {
-    auto cur_val = my_app_dialog.eq_display->GetValue();
-    my_app_dialog.clicked_button = dynamic_cast<wxButton*>(event.GetEventObject());
-    my_app_dialog.eq_display->SetValue(cur_val + my_app_dialog.clicked_button->GetLabel());
+  std::lock_guard<std::mutex> lck(mtx_);
+  auto cur_val = my_app_dialog.eq_display->GetValue();
+  my_app_dialog.clicked_button = dynamic_cast<wxButton*>(event.GetEventObject()); //event.GetEventObject is the object that had the event performed on it(button) - have to cast it to wxButton as it starts as a wxObject
+  my_app_dialog.eq_display->SetValue(cur_val + my_app_dialog.clicked_button->GetLabel());
 }
 
 // function to clear the input of the wxTextCtrl
 void AppFrame::ClearTextCtrl(wxCommandEvent& event) {
-   my_app_dialog.eq_display->SetValue("");
+  my_app_dialog.eq_display->SetValue("");
 }
 
+// function to delete the last input of the wxTextCtrl
 void AppFrame::DelLastInput(wxCommandEvent& event) {
   auto length = my_app_dialog.eq_display->GetLastPosition();
   auto edit_val = my_app_dialog.eq_display->GetRange(0, (length - 1));
   my_app_dialog.eq_display->SetValue(edit_val);
+}
+
+// function to solve equation
+void AppFrame::GetEquation(wxCommandEvent& event) {
+  auto cur_equation = my_app_dialog.eq_display->GetValue();
+  std::promise<wxString> prms;
+  std::future<wxString> ftr = prms.get_future();
+  std::thread t_1(&AppFrame::SolveEquation, this, std::move(prms), std::ref(cur_equation));
+  try {
+    auto solved_equation = ftr.get();
+    my_app_dialog.eq_display->SetValue(solved_equation);
+  } catch (std::runtime_error e) {
+    std::cout << e.what() << std::endl;
+  }
+  t_1.join();
+}
+
+void AppFrame::SolveEquation(std::promise<wxString> &&prms, wxString &equation) {
+  // 10 is just a place holder for right now, trying to see if I can just get a string passed back
+  equation = "10";
+  prms.set_value(equation);
 }
 
 // implement wxWidgets application

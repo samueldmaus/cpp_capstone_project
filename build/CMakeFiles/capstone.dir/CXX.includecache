@@ -13,6 +13,14 @@ sstream
 -
 string
 -
+future
+-
+thread
+-
+memory
+-
+functional
+-
 wx/time.h
 -
 app_gui.h
@@ -26,6 +34,8 @@ wx/wx.h
 ctime
 -
 mutex
+-
+future
 -
 
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.cpp

@@ -8,6 +8,7 @@ class MyDialog : public wxDialog
 public:
     wxTextCtrl *eq_display;
     wxButton* button;
+    wxButton* clicked_button;
 };
 
 #endif

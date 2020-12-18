@@ -21,6 +21,10 @@ memory
 -
 functional
 -
+vector
+-
+wx/string.h
+-
 wx/time.h
 -
 app_gui.h
@@ -36,6 +40,8 @@ ctime
 mutex
 -
 future
+-
+vector
 -
 
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.cpp

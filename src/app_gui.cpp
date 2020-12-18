@@ -5,6 +5,8 @@
 #include <thread>
 #include <memory>
 #include <functional>
+#include <vector>
+#include <wx/string.h>
 #include <wx/time.h>
 
 #include "app_gui.h"
@@ -86,7 +88,7 @@ void AppFrame::DelLastInput(wxCommandEvent& event) {
   my_app_dialog.eq_display->SetValue(edit_val);
 }
 
-// function to solve equation
+// function to get started solve equation
 void AppFrame::GetEquation(wxCommandEvent& event) {
   auto cur_equation = my_app_dialog.eq_display->GetValue();
   std::promise<wxString> prms;
@@ -103,8 +105,46 @@ void AppFrame::GetEquation(wxCommandEvent& event) {
 
 void AppFrame::SolveEquation(std::promise<wxString> &&prms, wxString &equation) {
   // 10 is just a place holder for right now, trying to see if I can just get a string passed back
-  equation = "10";
-  prms.set_value(equation);
+  AppFrame::GetOperatorIndex(equation);
+  std::string final_answer = AppFrame::DoMath(equation);
+  prms.set_value(final_answer);
+}
+
+std::string AppFrame::DoMath(wxString &equation) {
+  std::string result = "";
+  equation.ToStdString();
+  while(!AppFrame::operator_index.empty()) {
+    if(AppFrame::operator_index.size() != 1) {
+      return result;
+    } else {
+      auto num_1 = wxAtoi(equation.substr(0, AppFrame::operator_index[0]));
+      auto num_2 = wxAtoi(equation.substr(AppFrame::operator_index[0] + 1));
+
+      if(equation[AppFrame::operator_index[0]] == '+') {
+        std::cout << "num 1 is " << num_1 << std::endl;
+        std::cout << "num 2 is " << num_2 << std::endl;
+        auto num_result = num_1 + num_2;
+        result = std::to_string(num_result);
+        AppFrame::operator_index.erase(AppFrame::operator_index.begin());
+      }
+    }
+
+  }
+  return result;
+}
+
+void AppFrame::GetOperatorIndex(wxString equation) {
+  equation.ToStdString();
+  for (int i = 0; i < equation.length(); i++) {
+    if (equation[i] == '+' || equation[i] == '-' || equation[i] == 'x' || equation[i] == '/') {
+      AppFrame::operator_index.push_back(i);
+    }
+  }
+  /* just prints indexes of the operators
+  for(int num : AppFrame::operator_index) {
+    std::cout << num << std::endl;
+  }
+  */
 }
 
 // implement wxWidgets application

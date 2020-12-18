@@ -5,6 +5,7 @@
 #include <ctime>
 #include <mutex>
 #include <future>
+#include <vector>
 
 // wxWidgets Frame that controls all elements
 class AppFrame : public wxFrame
@@ -16,9 +17,11 @@ public:
     void DelLastInput(wxCommandEvent& event);
     void GetEquation(wxCommandEvent& event);
     void SolveEquation(std::promise<wxString> &&prms, wxString &equation);
+    std::string DoMath(wxString &equation);
+    void GetOperatorIndex(wxString equation);
     wxBoxSizer *sizer;
     wxGridSizer *grd_sizer;
-
+    std::vector<int> operator_index;
 private:
     std::mutex mtx_;
 };

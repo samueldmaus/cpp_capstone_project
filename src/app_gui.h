@@ -2,6 +2,7 @@
 #define APP_GUI_H
 
 #include <wx/wx.h>
+#include <wx/event.h>
 #include <ctime>
 #include <mutex>
 #include <deque>
@@ -19,6 +20,7 @@ public:
     void SolveEquation(std::promise<wxString> &&prms, wxString &equation);
     std::string DoMath(wxString &equation);
     void GetOperatorIndex(wxString &equation);
+    void OnQuit(wxCommandEvent& event);
     wxBoxSizer *sizer;
     wxGridSizer *grd_sizer;
     std::deque<int> operator_index;

@@ -6,6 +6,7 @@
 #include <memory>
 #include <functional>
 #include <deque>
+#include <wx/wx.h>
 #include <wx/string.h>
 #include <wx/time.h>
 
@@ -48,7 +49,10 @@ AppFrame::AppFrame(const wxString& title)
   grd_sizer->Add(BUTTON_DEL, 0, wxEXPAND);
 
   grd_sizer->Add(new wxStaticText(this, -1, wxT("")), 0, wxEXPAND);
-  grd_sizer->Add(new wxButton(this, -1, wxT("QUIT")), 0, wxEXPAND);
+  wxButton* BUTTON_QUIT = new wxButton(this, -1, wxT("QUIT"));
+  BUTTON_QUIT->Bind(wxEVT_BUTTON, &AppFrame::OnQuit, this);
+  grd_sizer->Add(BUTTON_QUIT, 0, wxEXPAND);
+
 
   // everything for the buttons
   for (wxString &row : rows) {
@@ -65,6 +69,10 @@ AppFrame::AppFrame(const wxString& title)
 
   sizer->Add(grd_sizer, 1, wxEXPAND);
   SetSizer(sizer);
+
+  // file menu
+
+
   Centre();
 }
 
@@ -169,6 +177,10 @@ void AppFrame::GetOperatorIndex(wxString &equation) {
     std::cout << num << std::endl;
   }
   */
+}
+
+void AppFrame::OnQuit(wxCommandEvent & WXUNUSED(event)) {
+   Close(true);
 }
 
 // implement wxWidgets application

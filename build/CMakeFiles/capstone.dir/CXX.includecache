@@ -23,6 +23,8 @@ functional
 -
 deque
 -
+wx/wx.h
+-
 wx/string.h
 -
 wx/time.h
@@ -34,6 +36,8 @@ dialog.cpp
 
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.h
 wx/wx.h
+-
+wx/event.h
 -
 ctime
 -

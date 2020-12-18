@@ -88,7 +88,7 @@ void AppFrame::DelLastInput(wxCommandEvent& event) {
   my_app_dialog.eq_display->SetValue(edit_val);
 }
 
-// function to get started solve equation
+// function to get equation for textctrl, start separate thread, and set value of textctrl once equation has been solved
 void AppFrame::GetEquation(wxCommandEvent& event) {
   auto cur_equation = my_app_dialog.eq_display->GetValue();
   std::promise<wxString> prms;
@@ -103,13 +103,14 @@ void AppFrame::GetEquation(wxCommandEvent& event) {
   t_1.join();
 }
 
+// function run operators func, math func, and set value of prms
 void AppFrame::SolveEquation(std::promise<wxString> &&prms, wxString &equation) {
-  // 10 is just a place holder for right now, trying to see if I can just get a string passed back
   AppFrame::GetOperatorIndex(equation);
   std::string final_answer = AppFrame::DoMath(equation);
   prms.set_value(final_answer);
 }
 
+// function to do math of the equation
 std::string AppFrame::DoMath(wxString &equation) {
   std::string result = "";
   equation.ToStdString();
@@ -120,8 +121,6 @@ std::string AppFrame::DoMath(wxString &equation) {
       auto num_1 = wxAtoi(equation.substr(0, AppFrame::operator_index[0]));
       auto num_2 = wxAtoi(equation.substr(AppFrame::operator_index[0] + 1));
       if(equation[AppFrame::operator_index[0]] == '+') {
-        std::cout << "num 1 is " << num_1 << std::endl;
-        std::cout << "num 2 is " << num_2 << std::endl;
         auto num_result = num_1 + num_2;
         result = std::to_string(num_result);
         AppFrame::operator_index.erase(AppFrame::operator_index.begin());
@@ -144,11 +143,16 @@ std::string AppFrame::DoMath(wxString &equation) {
   return result;
 }
 
+// function to get indexes of operators (+, -, x, /)
 void AppFrame::GetOperatorIndex(wxString equation) {
   equation.ToStdString();
   for (int i = 0; i < equation.length(); i++) {
     if (equation[i] == '+' || equation[i] == '-' || equation[i] == 'x' || equation[i] == '/') {
-      AppFrame::operator_index.push_back(i);
+      if (i == 0) {
+        i++;
+      } else {
+        AppFrame::operator_index.push_back(i);
+      }
     }
   }
   /* just prints indexes of the operators

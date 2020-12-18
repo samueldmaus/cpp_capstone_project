@@ -71,7 +71,12 @@ AppFrame::AppFrame(const wxString& title)
   SetSizer(sizer);
 
   // file menu
-
+  menubar = new wxMenuBar;
+  file = new wxMenu;
+  menubar->Append(file, wxT("&File"));
+  file->Append(wxID_EXIT, wxT("&Quit"));
+  file->Bind(wxEVT_COMMAND_MENU_SELECTED, &AppFrame::OnQuit, this, wxID_EXIT);
+  SetMenuBar(menubar);
 
   Centre();
 }

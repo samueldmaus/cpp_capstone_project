@@ -24,6 +24,8 @@ public:
     wxBoxSizer *sizer;
     wxGridSizer *grd_sizer;
     std::deque<int> operator_index;
+    wxMenuBar *menubar;
+    wxMenu *file;
 private:
     std::mutex mtx_;
 };

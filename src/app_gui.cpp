@@ -73,7 +73,11 @@ AppFrame::AppFrame(const wxString& title)
   // file menu
   menubar = new wxMenuBar;
   file = new wxMenu;
+  type = new wxMenu;
   menubar->Append(file, wxT("&File"));
+  file->AppendSubMenu(type, wxT("Type"));
+  type->Append(wxID_ANY, wxT("Standard"));
+  type->Append(wxID_ANY, wxT("Scientific"));
   file->Append(wxID_EXIT, wxT("&Quit"));
   file->Bind(wxEVT_COMMAND_MENU_SELECTED, &AppFrame::OnQuit, this, wxID_EXIT);
   SetMenuBar(menubar);

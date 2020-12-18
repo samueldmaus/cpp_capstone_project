@@ -26,6 +26,7 @@ public:
     std::deque<int> operator_index;
     wxMenuBar *menubar;
     wxMenu *file;
+    wxMenu *type;
 private:
     std::mutex mtx_;
 };

@@ -119,11 +119,22 @@ std::string AppFrame::DoMath(wxString &equation) {
     } else {
       auto num_1 = wxAtoi(equation.substr(0, AppFrame::operator_index[0]));
       auto num_2 = wxAtoi(equation.substr(AppFrame::operator_index[0] + 1));
-
       if(equation[AppFrame::operator_index[0]] == '+') {
         std::cout << "num 1 is " << num_1 << std::endl;
         std::cout << "num 2 is " << num_2 << std::endl;
         auto num_result = num_1 + num_2;
+        result = std::to_string(num_result);
+        AppFrame::operator_index.erase(AppFrame::operator_index.begin());
+      } else if (equation[AppFrame::operator_index[0]] == '-') {
+        auto num_result = num_1 - num_2;
+        result = std::to_string(num_result);
+        AppFrame::operator_index.erase(AppFrame::operator_index.begin());
+      } else if (equation[AppFrame::operator_index[0]] == 'x') {
+        auto num_result = num_1 * num_2;
+        result = std::to_string(num_result);
+        AppFrame::operator_index.erase(AppFrame::operator_index.begin());
+      } else if (equation[AppFrame::operator_index[0]] == '/') {
+        auto num_result = num_1 / num_2;
         result = std::to_string(num_result);
         AppFrame::operator_index.erase(AppFrame::operator_index.begin());
       }

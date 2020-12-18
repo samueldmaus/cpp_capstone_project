@@ -4,7 +4,7 @@
 #include <wx/wx.h>
 #include <ctime>
 #include <mutex>
-#include <future>
+#include <deque>
 #include <vector>
 
 // wxWidgets Frame that controls all elements
@@ -18,10 +18,10 @@ public:
     void GetEquation(wxCommandEvent& event);
     void SolveEquation(std::promise<wxString> &&prms, wxString &equation);
     std::string DoMath(wxString &equation);
-    void GetOperatorIndex(wxString equation);
+    void GetOperatorIndex(wxString &equation);
     wxBoxSizer *sizer;
     wxGridSizer *grd_sizer;
-    std::vector<int> operator_index;
+    std::deque<int> operator_index;
 private:
     std::mutex mtx_;
 };

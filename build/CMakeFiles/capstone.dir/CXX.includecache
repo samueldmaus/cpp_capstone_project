@@ -21,7 +21,7 @@ memory
 -
 functional
 -
-vector
+deque
 -
 wx/string.h
 -
@@ -39,7 +39,7 @@ ctime
 -
 mutex
 -
-future
+deque
 -
 vector
 -

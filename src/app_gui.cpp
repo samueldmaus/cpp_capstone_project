@@ -5,7 +5,7 @@
 #include <thread>
 #include <memory>
 #include <functional>
-#include <vector>
+#include <deque>
 #include <wx/string.h>
 #include <wx/time.h>
 
@@ -110,41 +110,50 @@ void AppFrame::SolveEquation(std::promise<wxString> &&prms, wxString &equation) 
   prms.set_value(final_answer);
 }
 
-// function to do math of the equation
+// function to do math of the equation (recursion)
 std::string AppFrame::DoMath(wxString &equation) {
   std::string result = "";
   equation.ToStdString();
-  while(!AppFrame::operator_index.empty()) {
-    if(AppFrame::operator_index.size() != 1) {
-      return result;
-    } else {
-      auto num_1 = wxAtoi(equation.substr(0, AppFrame::operator_index[0]));
-      auto num_2 = wxAtoi(equation.substr(AppFrame::operator_index[0] + 1));
-      if(equation[AppFrame::operator_index[0]] == '+') {
-        auto num_result = num_1 + num_2;
-        result = std::to_string(num_result);
-        AppFrame::operator_index.erase(AppFrame::operator_index.begin());
-      } else if (equation[AppFrame::operator_index[0]] == '-') {
-        auto num_result = num_1 - num_2;
-        result = std::to_string(num_result);
-        AppFrame::operator_index.erase(AppFrame::operator_index.begin());
-      } else if (equation[AppFrame::operator_index[0]] == 'x') {
-        auto num_result = num_1 * num_2;
-        result = std::to_string(num_result);
-        AppFrame::operator_index.erase(AppFrame::operator_index.begin());
-      } else if (equation[AppFrame::operator_index[0]] == '/') {
-        auto num_result = num_1 / num_2;
-        result = std::to_string(num_result);
-        AppFrame::operator_index.erase(AppFrame::operator_index.begin());
-      }
+  while(AppFrame::operator_index.size() > 1) {
+    auto num_1 = wxAtoi(equation.substr(0, AppFrame::operator_index[0]));
+    auto num_2 = wxAtoi(equation.substr((AppFrame::operator_index[0] + 1), (AppFrame::operator_index[1] - AppFrame::operator_index[0] - 1)));
+    if(equation[AppFrame::operator_index[0]] == '+') {
+      auto num_result = num_1 + num_2;
+      result = std::to_string(num_result);
+    } else if (equation[AppFrame::operator_index[0]] == '-') {
+      auto num_result = num_1 - num_2;
+      result = std::to_string(num_result);
+    } else if (equation[AppFrame::operator_index[0]] == 'x') {
+      auto num_result = num_1 * num_2;
+      result = std::to_string(num_result);
+    } else if (equation[AppFrame::operator_index[0]] == '/') {
+      auto num_result = num_1 / num_2;
+      result = std::to_string(num_result);
     }
-
+    equation = result + equation.substr(AppFrame::operator_index[1]);
+    AppFrame::GetOperatorIndex(equation);
   }
+    auto num_1 = wxAtoi(equation.substr(0, AppFrame::operator_index[0]));
+    auto num_2 = wxAtoi(equation.substr(AppFrame::operator_index[0] + 1));
+    if(equation[AppFrame::operator_index[0]] == '+') {
+      auto num_result = num_1 + num_2;
+      result = std::to_string(num_result);
+    } else if (equation[AppFrame::operator_index[0]] == '-') {
+      auto num_result = num_1 - num_2;
+      result = std::to_string(num_result);
+    } else if (equation[AppFrame::operator_index[0]] == 'x') {
+      auto num_result = num_1 * num_2;
+      result = std::to_string(num_result);
+    } else if (equation[AppFrame::operator_index[0]] == '/') {
+      auto num_result = num_1 / num_2;
+      result = std::to_string(num_result);
+    }
   return result;
 }
 
 // function to get indexes of operators (+, -, x, /)
-void AppFrame::GetOperatorIndex(wxString equation) {
+void AppFrame::GetOperatorIndex(wxString &equation) {
+  AppFrame::operator_index.clear();
   equation.ToStdString();
   for (int i = 0; i < equation.length(); i++) {
     if (equation[i] == '+' || equation[i] == '-' || equation[i] == 'x' || equation[i] == '/') {

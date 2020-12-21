@@ -21,12 +21,15 @@ public:
     std::string DoMath(wxString &equation);
     void GetOperatorIndex(wxString &equation);
     void OnQuit(wxCommandEvent& event);
+    void SwitchCalcTypes(wxCommandEvent& event);
     wxBoxSizer *sizer;
     wxGridSizer *grd_sizer;
     std::deque<int> operator_index;
     wxMenuBar *menubar;
     wxMenu *file;
     wxMenu *type;
+    wxMenuItem *standard;
+    wxMenuItem *scientific;
 private:
     std::mutex mtx_;
 };

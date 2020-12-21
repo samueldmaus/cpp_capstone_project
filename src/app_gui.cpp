@@ -71,10 +71,12 @@ AppFrame::AppFrame(const wxString& title)
   type = new wxMenu;
   menubar->Append(file, wxT("&File"));
   file->AppendSubMenu(type, wxT("Type"));
-  type->Append(wxID_ANY, wxT("Standard"));
-  type->Append(wxID_ANY, wxT("Scientific"));
+  standard = type->AppendRadioItem(wxID_ANY, wxT("Standard"));
+  scientific = type->AppendRadioItem(wxID_ANY, wxT("Scientific"));
+  standard->Check(true);
   file->Append(wxID_EXIT, wxT("&Quit"));
   file->Bind(wxEVT_COMMAND_MENU_SELECTED, &AppFrame::OnQuit, this, wxID_EXIT);
+  Connect(wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(AppFrame::SwitchCalcTypes));
   SetMenuBar(menubar);
 
   Centre();
@@ -191,6 +193,14 @@ void AppFrame::GetOperatorIndex(wxString &equation) {
 
 void AppFrame::OnQuit(wxCommandEvent & WXUNUSED(event)) {
    Close(true);
+}
+
+void AppFrame::SwitchCalcTypes(wxCommandEvent& event) {
+  if(standard->IsChecked()) {
+    std::cout << "STANDARD MODE" << std::endl;
+  } else if(scientific->IsChecked()) {
+    std::cout << "SCIENTIFIC MODE" << std::endl;
+  }
 }
 
 // implement wxWidgets application

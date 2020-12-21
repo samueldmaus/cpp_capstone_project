@@ -23,6 +23,8 @@ functional
 -
 deque
 -
+math.h
+-
 wx/wx.h
 -
 wx/string.h

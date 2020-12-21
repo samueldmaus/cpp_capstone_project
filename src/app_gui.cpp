@@ -6,6 +6,7 @@
 #include <memory>
 #include <functional>
 #include <deque>
+#include <math.h>
 #include <wx/wx.h>
 #include <wx/string.h>
 #include <wx/time.h>
@@ -16,8 +17,8 @@
 // event table handler
 
 // array for button labels
-wxString rows[] = {_("7"), _("8"), wxString(wxT("9")), wxString(wxT("/")), wxString(wxT("4")), wxString(wxT("5")), wxString(wxT("6")),
-  wxString(wxT("x")), wxString(wxT("1")), wxString(wxT("2")), wxString(wxT("3")), wxString(wxT("-")), wxString(wxT("0")), wxString(wxT(".")),
+wxString rows[] = {_("("), _(")"), _("7"), _("8"), wxString(wxT("9")), wxString(wxT("/")), wxString(wxT("4")), wxString(wxT("5")), wxString(wxT("6")),
+  wxString(wxT("x")), wxString(wxT("1")), wxString(wxT("2")), wxString(wxT("3")), wxString(wxT("-")), wxString(wxT("0")), wxString(wxT("^")),
   wxString(wxT("=")), wxString(wxT("+"))};
 
 bool MyApp::OnInit() {
@@ -47,12 +48,6 @@ AppFrame::AppFrame(const wxString& title)
   wxButton* BUTTON_DEL = new wxButton(this, -1, _("DEL"));
   BUTTON_DEL->Bind(wxEVT_BUTTON, &AppFrame::DelLastInput, this);
   grd_sizer->Add(BUTTON_DEL, 0, wxEXPAND);
-
-  grd_sizer->Add(new wxStaticText(this, -1, wxT("")), 0, wxEXPAND);
-  wxButton* BUTTON_QUIT = new wxButton(this, -1, wxT("QUIT"));
-  BUTTON_QUIT->Bind(wxEVT_BUTTON, &AppFrame::OnQuit, this);
-  grd_sizer->Add(BUTTON_QUIT, 0, wxEXPAND);
-
 
   // everything for the buttons
   for (wxString &row : rows) {
@@ -146,6 +141,9 @@ std::string AppFrame::DoMath(wxString &equation) {
     } else if (equation[AppFrame::operator_index[0]] == '/') {
       auto num_result = num_1 / num_2;
       result = std::to_string(num_result);
+    } else if (equation[AppFrame::operator_index[0]] == '^') {
+      auto num_result = pow(num_1, num_2);
+      result = std::to_string(num_result);
     }
     equation = result + equation.substr(AppFrame::operator_index[1]);
     AppFrame::GetOperatorIndex(equation);
@@ -164,6 +162,9 @@ std::string AppFrame::DoMath(wxString &equation) {
     } else if (equation[AppFrame::operator_index[0]] == '/') {
       auto num_result = num_1 / num_2;
       result = std::to_string(num_result);
+    } else if (equation[AppFrame::operator_index[0]] == '^') {
+      auto num_result = pow(num_1, num_2);
+      result = std::to_string(num_result);
     }
   return result;
 }
@@ -173,7 +174,7 @@ void AppFrame::GetOperatorIndex(wxString &equation) {
   AppFrame::operator_index.clear();
   equation.ToStdString();
   for (int i = 0; i < equation.length(); i++) {
-    if (equation[i] == '+' || equation[i] == '-' || equation[i] == 'x' || equation[i] == '/') {
+    if (equation[i] == '+' || equation[i] == '-' || equation[i] == 'x' || equation[i] == '/' || equation[i] == '^') {
       if (i == 0) {
         i++;
       } else {

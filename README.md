@@ -3,7 +3,12 @@
 ## Description
 This is my capstone project for the Udacity C++ Nanodegree Program. This calculator was built using wxWidgets for the graphical user interface.
 The calculator has two modes, "Standard" or "Scientific". The standard mode will ignore order of operations and performs calculations going from
-left to right. The scientific mode will abide by order of operations. The mode of the calculator can be switched in the file menu under 'type'.
+left to right. The scientific mode will perform operations according to the rules of order of operations, including the use of '()' to force precedence on certain
+calculations. The mode of the calculator can be switched in the file menu under the 'type' submenu by selecting either 'standard' or 'scientific'. The modes are modeled after the 'standard' and 'scientific' modes currently available on the calculator application in Windows 10.
+
+## Screenshots
+![basecalc](/imgs/base_calc.png)
+![equationcalc](/imgs/equation_calc.png)
 
 ## Dependencies
 * cmake >= 3.11

@@ -56,7 +56,7 @@ AppFrame::AppFrame(const wxString& title)
       my_app_dialog.button = new wxButton(this, 1, row);
       my_app_dialog.button->Bind(wxEVT_BUTTON, &AppFrame::GetEquation, this);
       grd_sizer->Add(my_app_dialog.button, 0, wxEXPAND);
-    } else {
+    } else { // #2. The project accepts user input and processes the input -- users can click the buttons and get the value to appear using this and the function OnButtonClick
       my_app_dialog.button = new wxButton(this, 1, row);
       my_app_dialog.button->Bind(wxEVT_BUTTON, &AppFrame::OnButtonClick, this);
       grd_sizer->Add(my_app_dialog.button, 0, wxEXPAND);

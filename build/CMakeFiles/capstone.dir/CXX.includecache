@@ -35,6 +35,8 @@ app_gui.h
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.h
 dialog.cpp
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.cpp
+stack.cpp
+/home/sammaus/ubuntu_projects/udacity_capstone_project/src/stack.cpp
 
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.h
 wx/wx.h
@@ -55,6 +57,20 @@ dialog.h
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.h
 
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/dialog.h
+wx/wx.h
+-
+
+/home/sammaus/ubuntu_projects/udacity_capstone_project/src/stack.cpp
+stack.h
+/home/sammaus/ubuntu_projects/udacity_capstone_project/src/stack.h
+
+/home/sammaus/ubuntu_projects/udacity_capstone_project/src/stack.h
+stack
+-
+math.h
+-
+string
+-
 wx/wx.h
 -
 

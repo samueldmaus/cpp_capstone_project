@@ -13,6 +13,7 @@
 
 #include "app_gui.h"
 #include "dialog.cpp"
+#include "stack.cpp"
 
 // event table handler
 
@@ -105,16 +106,20 @@ void AppFrame::DelLastInput(wxCommandEvent& event) {
 // function to get equation for textctrl, start separate thread, and set value of textctrl once equation has been solved
 void AppFrame::GetEquation(wxCommandEvent& event) {
   auto cur_equation = my_app_dialog.eq_display->GetValue();
-  std::promise<wxString> prms;
-  std::future<wxString> ftr = prms.get_future();
-  std::thread t_1(&AppFrame::SolveEquation, this, std::move(prms), std::ref(cur_equation));
-  try {
-    auto solved_equation = ftr.get();
-    my_app_dialog.eq_display->SetValue(solved_equation);
-  } catch (std::runtime_error e) {
-    std::cout << e.what() << std::endl;
+  if(standard->IsChecked()) {
+    std::promise<wxString> prms;
+    std::future<wxString> ftr = prms.get_future();
+    std::thread t_1(&AppFrame::SolveEquation, this, std::move(prms), std::ref(cur_equation));
+    try {
+      auto solved_equation = ftr.get();
+      my_app_dialog.eq_display->SetValue(solved_equation);
+    } catch (std::runtime_error e) {
+      std::cout << e.what() << std::endl;
+    }
+    t_1.join(); // join the thread
+  } else {
+    calc_stack.ScientificEquation(cur_equation);
   }
-  t_1.join();
 }
 
 // function run operators func, math func, and set value of prms

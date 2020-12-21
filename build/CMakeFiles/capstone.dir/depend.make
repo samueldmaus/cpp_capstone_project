@@ -5,6 +5,8 @@ CMakeFiles/capstone.dir/src/app_gui.cpp.o: ../src/app_gui.cpp
 CMakeFiles/capstone.dir/src/app_gui.cpp.o: ../src/app_gui.h
 CMakeFiles/capstone.dir/src/app_gui.cpp.o: ../src/dialog.cpp
 CMakeFiles/capstone.dir/src/app_gui.cpp.o: ../src/dialog.h
+CMakeFiles/capstone.dir/src/app_gui.cpp.o: ../src/stack.cpp
+CMakeFiles/capstone.dir/src/app_gui.cpp.o: ../src/stack.h
 CMakeFiles/capstone.dir/src/app_gui.cpp.o: /usr/include/wx-3.0/wx/accel.h
 CMakeFiles/capstone.dir/src/app_gui.cpp.o: /usr/include/wx-3.0/wx/access.h
 CMakeFiles/capstone.dir/src/app_gui.cpp.o: /usr/include/wx-3.0/wx/affinematrix2d.h

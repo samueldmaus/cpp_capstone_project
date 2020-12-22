@@ -1,19 +1,17 @@
 #include "stack.h"
-#include "app_gui.h"
 
-Stack calc_stack;
-
-void Stack::ScientificEquation(wxString &equation) {
+wxString Stack::ScientificEquation(wxString &equation) {
+    wxString solved_equation;
     std::promise<wxString> prms;
     std::future<wxString> ftr = prms.get_future();
     std::thread t_1(&Stack::SolveEquationScientific, this, std::move(prms), std::ref(equation));
     try {
-      auto solved_equation = ftr.get();
-      my_app_dialog.eq_display->SetValue(solved_equation);
+        solved_equation = ftr.get();
     } catch (std::runtime_error e) {
-      std::cout << e.what() << std::endl;
+        std::cout << e.what() << std::endl;
     }
     t_1.join(); // join the thread
+    return solved_equation;
 }
 
 bool Stack::isOperator(char c) {

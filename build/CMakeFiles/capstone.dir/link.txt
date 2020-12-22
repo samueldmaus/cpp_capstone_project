@@ -1,1 +1,1 @@
-/bin/c++   -pthread   CMakeFiles/capstone.dir/src/app_gui.cpp.o  -o capstone  -L/usr/lib/x86_64-linux-gnu -pthread -lwx_gtk3u_core-3.0 -lwx_baseu-3.0 
+/bin/c++   -pthread   CMakeFiles/capstone.dir/src/app_gui.cpp.o CMakeFiles/capstone.dir/src/stack.cpp.o  -o capstone  -L/usr/lib/x86_64-linux-gnu -pthread -lwx_gtk3u_core-3.0 -lwx_baseu-3.0 

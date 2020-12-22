@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.cpp" "/home/sammaus/ubuntu_projects/udacity_capstone_project/build/CMakeFiles/capstone.dir/src/app_gui.cpp.o"
+  "/home/sammaus/ubuntu_projects/udacity_capstone_project/src/stack.cpp" "/home/sammaus/ubuntu_projects/udacity_capstone_project/build/CMakeFiles/capstone.dir/src/stack.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

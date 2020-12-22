@@ -1,21 +1,10 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <future>
-#include <thread>
-#include <memory>
-#include <functional>
-#include <deque>
-#include <math.h>
-#include <wx/wx.h>
-#include <wx/string.h>
-#include <wx/time.h>
-
 #include "app_gui.h"
-#include "dialog.cpp"
-#include "stack.cpp"
+#include "dialog.h"
+#include "stack.h"
 
 // event table handler
+MyDialog my_app_dialog;
+Stack calc_stack;
 
 // array for button labels
 wxString rows[] = {_("("), _(")"), _("7"), _("8"), wxString(wxT("9")), wxString(wxT("/")), wxString(wxT("4")), wxString(wxT("5")), wxString(wxT("6")),
@@ -105,20 +94,22 @@ void AppFrame::DelLastInput(wxCommandEvent& event) {
 
 // function to get equation for textctrl, start separate thread, and set value of textctrl once equation has been solved
 void AppFrame::GetEquation(wxCommandEvent& event) {
+  wxString solved_equation;
   auto cur_equation = my_app_dialog.eq_display->GetValue();
   if(standard->IsChecked()) {
     std::promise<wxString> prms;
     std::future<wxString> ftr = prms.get_future();
     std::thread t_1(&AppFrame::SolveEquation, this, std::move(prms), std::ref(cur_equation));
     try {
-      auto solved_equation = ftr.get();
+      solved_equation = ftr.get();
       my_app_dialog.eq_display->SetValue(solved_equation);
     } catch (std::runtime_error e) {
       std::cout << e.what() << std::endl;
     }
     t_1.join(); // join the thread
   } else {
-    calc_stack.ScientificEquation(cur_equation);
+    solved_equation = calc_stack.ScientificEquation(cur_equation);
+    my_app_dialog.eq_display->SetValue(solved_equation);
   }
 }
 

@@ -1,12 +1,19 @@
 #ifndef APP_GUI_H
 #define APP_GUI_H
 
-#include <wx/wx.h>
-#include <wx/event.h>
-#include <ctime>
-#include <mutex>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <future>
+#include <thread>
+#include <memory>
+#include <functional>
 #include <deque>
-#include <vector>
+#include <math.h>
+#include <wx/wx.h>
+#include <wx/string.h>
+#include <wx/time.h>
+#include <wx/event.h>
 
 // wxWidgets Frame that controls all elements
 class AppFrame : public wxFrame

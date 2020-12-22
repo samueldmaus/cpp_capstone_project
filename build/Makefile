@@ -150,6 +150,33 @@ src/app_gui.cpp.s:
 	$(MAKE) -f CMakeFiles/capstone.dir/build.make CMakeFiles/capstone.dir/src/app_gui.cpp.s
 .PHONY : src/app_gui.cpp.s
 
+src/stack.o: src/stack.cpp.o
+
+.PHONY : src/stack.o
+
+# target to build an object file
+src/stack.cpp.o:
+	$(MAKE) -f CMakeFiles/capstone.dir/build.make CMakeFiles/capstone.dir/src/stack.cpp.o
+.PHONY : src/stack.cpp.o
+
+src/stack.i: src/stack.cpp.i
+
+.PHONY : src/stack.i
+
+# target to preprocess a source file
+src/stack.cpp.i:
+	$(MAKE) -f CMakeFiles/capstone.dir/build.make CMakeFiles/capstone.dir/src/stack.cpp.i
+.PHONY : src/stack.cpp.i
+
+src/stack.s: src/stack.cpp.s
+
+.PHONY : src/stack.s
+
+# target to generate assembly for a file
+src/stack.cpp.s:
+	$(MAKE) -f CMakeFiles/capstone.dir/build.make CMakeFiles/capstone.dir/src/stack.cpp.s
+.PHONY : src/stack.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +189,9 @@ help:
 	@echo "... src/app_gui.o"
 	@echo "... src/app_gui.i"
 	@echo "... src/app_gui.s"
+	@echo "... src/stack.o"
+	@echo "... src/stack.i"
+	@echo "... src/stack.s"
 .PHONY : help
 
 

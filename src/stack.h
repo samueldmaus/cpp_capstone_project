@@ -14,7 +14,7 @@ public:
     std::stack<int> postfix_stack;
     bool isOperator(char c);
     int Precedence(char c);
-    void ScientificEquation(wxString &equation);
+    wxString ScientificEquation(wxString &equation);
     void SolveEquationScientific(std::promise<wxString> &&prms, wxString &equation);
     std::string infixToPostfix(wxString &infix, std::stack<char> &s);
     int evaluatePostfix(std::string &postfix, std::stack<int> &a);

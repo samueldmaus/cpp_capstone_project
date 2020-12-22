@@ -34,11 +34,11 @@ calculations. The mode of the calculator can be switched in the file menu under 
 
 ## Rubric Points Addressed
 1. The project demonstrates an understanding of C++ functions and control structures -- All Files
-2. The project accepts user input and processes the input -- app_gui.cpp: 59-63, 87-92
+2. The project accepts user input and processes the input -- app_gui.cpp: 48-52, 76-81
 3. The project uses Object Oriented Programming techniques -- All Files
-4. The project uses multithreading -- app_gui.cpp: 109-119 && stack.cpp: 5-16
-5. A promise and future is used in the project -- app_gui.cpp; 109-119 && stack.cpp: 5-16
-6. A mutex or lock is used in the project -- app.gui: 88
+4. The project uses multithreading -- app_gui.cpp; 100-109 && stack.cpp: 3-15
+5. A promise and future is used in the project -- app_gui.cpp; 100-109 && stack.cpp: 3-15
+6. A mutex or lock is used in the project -- app.gui: 77
 
 ## Support
 If you have suggestions or questions, please email me at samueldmaus@gmail.com

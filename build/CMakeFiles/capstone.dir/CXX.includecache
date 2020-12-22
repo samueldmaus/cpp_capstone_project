@@ -63,8 +63,14 @@ wx/wx.h
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/stack.cpp
 stack.h
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/stack.h
+app_gui.h
+/home/sammaus/ubuntu_projects/udacity_capstone_project/src/app_gui.h
 
 /home/sammaus/ubuntu_projects/udacity_capstone_project/src/stack.h
+thread
+-
+future
+-
 stack
 -
 math.h

@@ -1,6 +1,8 @@
 #ifndef STACK_H
 #define STACK_H
 
+#include <thread>
+#include <future>
 #include <stack>
 #include <math.h>
 #include <string>

@@ -1,4 +1,5 @@
 #include "stack.h"
+#include "app_gui.h"
 
 Stack calc_stack;
 
@@ -110,7 +111,7 @@ int Stack::evaluatePostfix(std::string &postfix, std::stack<int> &a) {
                     a.push(val);
                     break;
                 case '/':
-                    val = num_2 + num_1;
+                    val = num_2 / num_1;
                     a.push(val);
                     break;
                 case '^':
